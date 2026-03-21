@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para la linda 💛</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial;
+      background: linear-gradient(#dff6ff, #fff6cc);
+    }
+
+    .centro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .centro img {
+      width: 560px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+
+    .mensaje {
+      background: rgb(255, 245, 169);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      max-width: 260px;
+      font-weight: bold;
+      color: #5a4300;
+      animation: flotar 3s infinite;
+    }
+
+    .flor {
+      position: absolute;
+      bottom: 0;
+      width: 240px;
+      animation: mover 4s infinite ease-in-out;
+    }
+
+    .flor img {
+      width: 100%;
+    }
+
+    @keyframes mover {
+
+      0%,
+      100% {
+        transform: rotate(-2deg);
+      }
+
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    @keyframes flotar {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    .petalo {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: gold;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: caer linear infinite;
+    }
+
+    @keyframes caer {
+      from {
+        transform: translateY(-10vh);
+      }
+
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="centro">
+    <img src="erickchibi.png">
+    <div class="mensaje">
+      Holap Keily, sé que no son físicas pero… 💛<br>
+      Y tambien linda, espero mejores xoxo
+    </div>
+  </div>
+
+  <script>
+
+    const flores = ["girasol.png", "tulipanes.png"];
+
+    for (let i = 0; i < 35; i++) {
+      let f = document.createElement("div");
+      f.className = "flor";
+      f.style.left = Math.random() * 100 + "%";
+      f.style.animationDuration = (3 + Math.random() * 2) + "s";
+
+      let img = document.createElement("img");
+      img.src = flores[Math.floor(Math.random() * flores.length)];
+
+      f.appendChild(img);
+      document.body.appendChild(f);
+    }
+
+    setInterval(() => {
+      let p = document.createElement("div");
+      p.className = "petalo";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(p);
+
+      setTimeout(() => p.remove(), 6000);
+    }, 400);
+
+    document.addEventListener("click", (e) => {
+      for (let i = 0; i < 8; i++) {
+        let f = document.createElement("img");
+        f.src = flores[Math.floor(Math.random() * flores.length)];
+        f.style.position = "absolute";
+        f.style.width = "40px";
+        f.style.left = e.clientX + "px";
+        f.style.top = e.clientY + "px";
+
+        document.body.appendChild(f);
+
+        let x = (Math.random() - 0.5) * 150;
+        let y = (Math.random() - 0.5) * 150;
+
+        f.animate([
+          { transform: `translate(0,0)` },
+          { transform: `translate(${x}px,${y}px)` }
+        ], { duration: 1000 });
+
+        setTimeout(() => f.remove(), 1000);
+      }
+    });
+
+  </script>
+
+</body>
+
+</html>
